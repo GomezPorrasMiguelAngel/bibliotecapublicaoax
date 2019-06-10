@@ -59,6 +59,7 @@ Route::get('actualizarL/{id}', 'UsuarioLibroController@edit_datosL')->middleware
 Route::get('/registro_plibro', function () {    return view('registro_plibro');})->middleware('verified')/*->name('registro_libro')->middleware('verified')*/;
 Route::put('actualizarpP/{id}','RegistroPrestamoController@actualizarP');
 Route::get('actualizarP/{id}', 'RegistroPrestamoController@edit_datosP')->middleware('verified');
+Route::put('eliminar_datosP/{id}', 'RegistroPrestamoController@eliminar_datos');
 //registrar libro
 Route::post('/registrar_plibro', 'RegistroPrestamoController@register_pbook');
 Route::get('vertablaP','RegistroPrestamoController@ver_tablaP')->middleware('verified');

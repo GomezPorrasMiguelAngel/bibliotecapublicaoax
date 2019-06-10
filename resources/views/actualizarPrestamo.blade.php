@@ -11,16 +11,18 @@
 
         {!!Form::open(array('url'=>'actualizarpP/'.$var1->id,'method'=>'PUT','autocomplete'=>'off','class'=>'form'))!!}
 		
-        <h4 style="font-weight: bold;">{{ __('Nuevo Libro:') }}</h4>
-        @csrf 
+        <h4 style="font-weight: bold;">{{ __('Libro:') }}</h4>
+      
+
 		{!!form::text('libro',$var1->titulo,array('disabled'))!!}		
 		 <br>  
-        <h4 style="font-weight: bold;">{{ __('Nuevo usuario:') }}</h4>
+
+        <h4 style="font-weight: bold;">{{ __('Usuario:') }}</h4>
         
 		{!!form::text('usuarioLibro',$var1->nombre,array('disabled'))!!} 
 		 <br>  		 
-        <h4 style="font-weight: bold;">{{ __('Nueva fecha de prestamo:') }}</h4>
-		{!!form::date('fechaPrestamo',$var1->fechaPrestamo)!!}
+        <h4 style="font-weight: bold;">{{ __('Fecha de prestamo:') }}</h4>
+		{!!form::date('fechaPrestamo',$var1->fechaPrestamo,array('disabled'))!!}
 		<br>  
 		 <h4 style="font-weight: bold;">{{ __('Nueva fecha de devolucion:') }}</h4>
 		{!!form::date('fechaDev',$var1->fechaDev)!!}

@@ -41,8 +41,13 @@
                                         {!!form::submit('Actualizar',['name'=>'grabar','id'=>'grabar','content'=>'<span>Actualizar</span>'])!!}
                                         {!!Form::close()!!}  --}}
                                         <div class="form-group form-button ">
-                                           
+                                            <a href="actualizarP/{{$c -> id }}" class="btn btn-warning float-right" role="button">Editar</a>
                                     </div>
+                                </td>
+                                  <td>
+                                        {!!Form::open(array('url'=>'eliminar_datosP/'.$c->id,'method'=>'PUT','autocomplete'=>'off'))!!}
+                                        {!!form::submit('Eliminar',['class'=>'btn btn-danger','name'=>'eli','id'=>'eli','content'=>'<span>Eliminar</span>'])!!}
+                                        {!!Form::close()!!}       
                                 </td>
                                 
                             </tr>

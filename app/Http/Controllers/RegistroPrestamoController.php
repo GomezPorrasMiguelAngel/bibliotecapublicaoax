@@ -30,10 +30,7 @@ class RegistroPrestamoController extends Controller
    
     public function actualizarP(Request $data,$id){
         $editar = Prestamo::find($id);
-        $editar->id = $data->$id;
-        $editar->libro = $data->libro;
-        $editar->usuarioLibro = $data->usuarioLibro;
-        $editar->fechaPrestamo = $data->fechaPrestamo;
+        
         $editar->fechaDev = $data->fechaDev;
         $editar->fechaEntrega = $data->fechaEntrega;
         $editar->observaciones = $data->observaciones;
@@ -65,31 +62,34 @@ class RegistroPrestamoController extends Controller
 
         $nuevo_plibro = Prestamo::create(['libro' => $libro, 'usuarioLibro' => $usuarioLibro, 'fechaPrestamo' => $fechaPrestamo, 'fechaDev' => $fechaDev, 'fechaEntrega' => $fechaEntrega, 'observaciones' => $observaciones]);
         if (!$nuevo_plibro->exists) {
+           
             return redirect()->back()->with('alert', 'Lo sentimos algo salio mal');
         } else {
-            $var1 = \DB::table('libro')
-            ->select('titulo')
-            ->where('idLibro',$libro)
-            ->get();
-            $var2 = \DB::table('usuariolibro')
-            ->select('nombre')
-            ->where('id',$usuarioLibro)
-            ->get();
-             $text =  ' Ha registrado un prestamo del libro  '  ;
-             $var3= $var1;
-             $var4=$var2;
-             $text2=$var4 . $text . $var3;
+             $text = 'ha registrado un prestamo del libro';
+             $var1=\DB::table('libro')
+             ->select('titulo')
+             ->where('idLibro',$libro)
+             ->get();
+             $var2=\DB::table('usuariolibro')
+             ->select('nombre')
+             ->where('id',$usuarioLibro)
+             ->get();
+             $text2=$var2 . $text . $var1;
 
             \Telegram::sendMessage([
                'chat_id' => '-1001199328658.0',
                'parse_mode' => 'HTML',
-               'text' => $text2 
+               'text' => $text2
             ]);
             return redirect()->back()->with('alert', 'Prestamo registrado correctamente');
         }
     }
 
-
+       public function eliminar_datos(Request $data,$id){
+        $editar = Prestamo::find($id);
+        $editar->delete();
+        return redirect()->to('vertablaP');
+    }
      public function listado_libros()
     {
         $libro = Libro::select('idLibro', 'titulo', 'genero', 'editorial', 'anio', 'nuPaginas', 'autor', 'lugar')->get();
